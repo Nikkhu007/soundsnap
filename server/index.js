@@ -12,8 +12,21 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middleware
+const allowedOrigins = [
+  'http://localhost:5173',
+  'http://localhost:3000',
+  'https://soundsnap-app.vercel.app',
+  /https:\/\/.*\.vercel\.app$/,   // any Vercel preview URL
+];
 app.use(cors({
-  origin: ['http://localhost:5173', 'http://localhost:3000'],
+  origin: (origin, callback) => {
+    // allow requests with no origin (curl, Postman, mobile apps)
+    if (!origin) return callback(null, true);
+    const allowed = allowedOrigins.some((o) =>
+      typeof o === 'string' ? o === origin : o.test(origin)
+    );
+    callback(allowed ? null : new Error('CORS blocked'), allowed);
+  },
   credentials: true,
 }));
 app.use(express.json());
