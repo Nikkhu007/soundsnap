@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: soundsnap-backend
+    runtime: node
+    rootDir: server
+    buildCommand: npm install
+    startCommand: node index.js
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: ACRCLOUD_HOST
+        value: identify-ap-southeast-1.acrcloud.com
+      - key: ACRCLOUD_ACCESS_KEY
+        sync: false
+      - key: ACRCLOUD_ACCESS_SECRET
+        sync: false
