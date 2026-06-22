@@ -1,0 +1,142 @@
+.listen-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  position: relative;
+}
+
+.listen-rings {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -58%);
+  width: 180px;
+  height: 180px;
+  pointer-events: none;
+}
+
+.ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  opacity: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.listen-rings.recording .ring {
+  animation: ringPulse 2s ease-out infinite;
+}
+
+.ring-1 { width: 130px; height: 130px; animation-delay: 0s !important; }
+.ring-2 { width: 160px; height: 160px; animation-delay: 0.5s !important; }
+.ring-3 { width: 190px; height: 190px; animation-delay: 1s !important; }
+
+@keyframes ringPulse {
+  0% { opacity: 0.8; transform: translate(-50%, -50%) scale(0.8); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(1.4); }
+}
+
+.listen-btn {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  background: var(--gradient);
+  box-shadow: 0 0 30px rgba(99, 102, 241, 0.4);
+  transition: transform 0.2s, box-shadow 0.2s;
+  padding: 3px;
+  position: relative;
+  z-index: 1;
+}
+
+.listen-btn:hover:not(:disabled) {
+  transform: scale(1.06);
+  box-shadow: 0 0 45px rgba(99, 102, 241, 0.6);
+}
+
+.listen-btn:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+.listen-btn:disabled {
+  cursor: not-allowed;
+}
+
+.listen-btn.recording {
+  box-shadow: 0 0 40px rgba(99, 102, 241, 0.7);
+  animation: breathe 1.8s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  0%, 100% { box-shadow: 0 0 30px rgba(99, 102, 241, 0.5); }
+  50% { box-shadow: 0 0 55px rgba(139, 92, 246, 0.8); }
+}
+
+.listen-btn-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: var(--bg-card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mic-icon {
+  width: 38px;
+  height: 38px;
+  color: white;
+}
+
+/* Waveform bars */
+.waveform {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 32px;
+}
+
+.wave-bar {
+  width: 4px;
+  background: white;
+  border-radius: 2px;
+  animation: waveAnim 0.8s ease-in-out infinite alternate;
+}
+
+.wave-bar:nth-child(1) { animation-delay: 0s; }
+.wave-bar:nth-child(2) { animation-delay: 0.1s; }
+.wave-bar:nth-child(3) { animation-delay: 0.2s; }
+.wave-bar:nth-child(4) { animation-delay: 0.1s; }
+.wave-bar:nth-child(5) { animation-delay: 0s; }
+
+@keyframes waveAnim {
+  from { height: 6px; }
+  to { height: 28px; }
+}
+
+/* Spinner */
+.spinner {
+  width: 34px;
+  height: 34px;
+  border: 3px solid rgba(255,255,255,0.2);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.listen-label {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+  text-align: center;
+  min-height: 1.4em;
+  transition: color 0.3s;
+}
